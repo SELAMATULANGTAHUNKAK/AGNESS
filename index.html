@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Ucapan Ulang Tahun</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ffdee9 0%, #b5fffc 100%);
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    /* Judul dan instruksi */
+    h1.title {
+      font-size: 3rem;
+      font-weight: bold;
+      margin: 20px 0 10px;
+      color: #ff0055;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    p.instruction {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    /* Stage 1 - Balon */
+    #balloon-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 80vh;
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .balloon {
+      width: 330px;   /* ukuran tetap */
+      height: 400px; /* ukuran tetap */
+      background: radial-gradient(circle at 50% 30%, #ff7eb3, #ff758c);
+      border-radius: 50% 50% 50% 50%;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      color: white;
+      font-size: 180px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .balloon:hover {
+      transform: scale(1.1);
+    }
+
+    .balloon:after {
+  content: "";
+  width: 2px;
+  height: 100px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #555,
+    #555 5px,
+    transparent 5px,
+    transparent 10px
+  );
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+    /* Stage 2 - Ucapan utama */
+    #main-content {
+      display: none;
+      padding: 50px 20px;
+      min-height: 100vh;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .hero-text {
+      font-size: 1.2rem;
+      text-align: left;
+    }
+
+    .hero-text h2 {
+      font-size: 2.5rem;
+      color: #ff4d6d;
+      margin-bottom: 10px;
+    }
+
+    .hero-text p {
+      margin: 5px 0;
+    }
+
+    .hero-img {
+      text-align: center;
+    }
+
+    .hero-img img {
+      width: 300px;
+      max-width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: scale(0.8);
+      animation: fadeZoom 1s forwards;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes fadeZoom {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Stage 3 - Ucapan panjang */
+    .message {
+      margin-top: 50px;
+      padding: 30px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      line-height: 1.8;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: red;
+      top: -10px;
+      animation: fall 5s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Judul & Instruksi -->
+  <h1 class="title">SELAMAT ULANG TAHUN</h1>
+  <p class="instruction">🎈 Pecahkan balon di bawah ini 🎈</p>
+
+  <!-- Stage 1 -->
+  <div id="balloon-container"></div>
+
+  <!-- Stage 2 & 3 -->
+  <div id="main-content">
+    <div class="hero">
+      <div class="hero-text">
+        <h2>Selamat Ulang Tahun, Agnes Aurellia</h2>
+        <p>Hari ini adalah hari spesialmu 🎂</p>
+        <p>Semoga panjang umur, sehat selalu, dan penuh kebahagiaan.</p>
+        <p>God bless you.</p>
+      </div>
+      <div class="hero-img">
+        <img src="HBD.png" alt="Foto Ulang Tahun">
+      </div>
+    </div>
+
+    <div class="message">
+      Hai,
+      selamat Ulang Tahun ya, semoga selalu dalam penyertaan TUHAN, tetap tekun 
+      dengan segala yang sedang di jalani sekarang baik dalam pekerjaan, pendidikan atau pelayanan di gereja.
+      Semoga setiap langkahmu penuh berkah, rezeki yang berlimpah, sahabat yang
+      setia, serta keluarga yang selalu mendukungmu. Jangan pernah berhenti
+      bermimpi dan melangkah maju. Selamat bertambah usia, semoga semua harapan
+      indahmu terwujud!. jangan lupa untuk tersenyum dan bahagia selalu ya 🎉
+    </div>
+  </div>
+
+  <script>
+  const balloonContainer = document.getElementById("balloon-container");
+  const mainContent = document.getElementById("main-content");
+
+  let currentBalloon = 1;
+  const totalBalloons = 20;
+
+  // fungsi buat balon
+  function showBalloon(number) {
+    const balloon = document.createElement("div");
+    balloon.className = "balloon";
+    balloon.textContent = number;
+
+    balloon.addEventListener("click", () => {
+      balloon.remove(); // hilangkan balon setelah diklik
+
+      if (number < totalBalloons) {
+        showBalloon(number + 1); // tampilkan balon berikutnya
+      } else {
+        // kalau sudah balon terakhir
+        balloonContainer.style.display = "none";
+        mainContent.style.display = "block"; // tampilkan halaman 2
+        launchConfetti();
+      }
+    });
+
+    balloonContainer.appendChild(balloon);
+  }
+
+  // mulai dari balon pertama
+  showBalloon(currentBalloon);
+
+  // Efek confetti
+  function launchConfetti() {
+    for (let i = 0; i < 100; i++) {
+      const conf = document.createElement("div");
+      conf.classList.add("confetti");
+      conf.style.left = Math.random() * window.innerWidth + "px";
+      conf.style.backgroundColor =
+        "hsl(" + Math.random() * 360 + ",100%,50%)";
+      conf.style.animationDuration = 2 + Math.random() * 3 + "s";
+      document.body.appendChild(conf);
+
+      setTimeout(() => {
+        conf.remove();
+      }, 5000);
+    }
+  }
+  </script>
+</body>
+</html>
